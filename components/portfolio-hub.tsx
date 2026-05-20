@@ -530,6 +530,8 @@ export function PortfolioHub() {
             <circle className="wdot" cx="706" cy="420" fill="#4f94ff" r="4" />
             <circle className="wdot" cx="480" cy="460" fill="#9060ff" r="4" />
             <circle className="wdot" cx="610" cy="455" fill="#00c8dc" r="4" />
+            <circle className="wdot" cx="752" cy="347" fill="#9060ff" r="4" />
+
           </svg>
 
           <div className="jnode jnode-chat" style={{ left: 396, top: 220 }}>
@@ -587,7 +589,7 @@ export function PortfolioHub() {
                 <div>
                   <div className="sn">9+</div>
                   <div className="sl">Years</div>
-                  <div className="sup">Lead delivery</div>
+                  <div className="sup">Lead developer</div>
                 </div>
                 <div>
                   <div className="sn">3</div>
@@ -669,7 +671,6 @@ export function PortfolioHub() {
               </div>
               <div className="pw skill-progress">
                 <div className="pf skill-pf" />
-                <div className="pt skill-pt" />
               </div>
               <div className="skill-chip-row">
                 <span className="skill-mini-chip active">API</span>
@@ -726,16 +727,7 @@ export function PortfolioHub() {
               <p className="about-summary">
                 Scalable product engineering across eCommerce, insurance, and enterprise systems.
               </p>
-              <div className="about-metrics">
-                <div className="about-metric">
-                  <strong>3</strong>
-                  <span>Domains</span>
-                </div>
-                <div className="about-metric">
-                  <strong>10+</strong>
-                  <span>Projects</span>
-                </div>
-              </div>
+              
             </div>
           </button>
 

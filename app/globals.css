@@ -581,9 +581,9 @@ input {
 
 #fc-reco {
   left: 50%;
-  bottom: 48px;
+  bottom: 12px;
   width: 220px;
-  height: 182px;
+  height: 192px;
   margin-left: -214px;
 }
 
@@ -599,7 +599,7 @@ input {
   right: 86px;
   top: 286px;
   width: 170px;
-  height: 124px;
+  height: 114px;
   margin-left: 0;
 }
 
