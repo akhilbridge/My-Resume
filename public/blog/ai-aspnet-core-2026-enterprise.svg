@@ -1,0 +1,45 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="900" rx="36" fill="#060B16"/>
+  <circle cx="230" cy="178" r="170" fill="#18439C" fill-opacity="0.28"/>
+  <circle cx="1160" cy="760" r="190" fill="#7A33CC" fill-opacity="0.24"/>
+  <text x="98" y="96" fill="#F4F7FF" font-family="Arial, sans-serif" font-size="42" font-weight="700">Where AI Creates Real Value in .NET Teams</text>
+  <g>
+    <rect x="96" y="154" width="372" height="222" rx="28" fill="#0D1B33" stroke="#4F94FF" stroke-opacity="0.7"/>
+    <text x="132" y="214" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="30" font-weight="700">Enterprise Copilots</text>
+    <text x="132" y="258" fill="#BFD6FF" font-family="Arial, sans-serif" font-size="21">HR support, internal knowledge, product guidance, sales enablement.</text>
+  </g>
+  <g>
+    <rect x="514" y="154" width="372" height="222" rx="28" fill="#111A37" stroke="#00C8DC" stroke-opacity="0.7"/>
+    <text x="550" y="214" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="30" font-weight="700">Document Intelligence</text>
+    <text x="550" y="258" fill="#B9F2F6" font-family="Arial, sans-serif" font-size="21">OCR, summarization, anomaly detection, claims and contract workflows.</text>
+  </g>
+  <g>
+    <rect x="932" y="154" width="372" height="222" rx="28" fill="#181633" stroke="#F070B0" stroke-opacity="0.7"/>
+    <text x="968" y="214" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="30" font-weight="700">Observability</text>
+    <text x="968" y="258" fill="#F7C7E0" font-family="Arial, sans-serif" font-size="21">Failure prediction, log analysis, abnormal traffic detection, tuning.</text>
+  </g>
+  <g>
+    <rect x="156" y="456" width="480" height="260" rx="30" fill="#0C1730" stroke="#5E7FFF" stroke-opacity="0.72"/>
+    <text x="198" y="522" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="34" font-weight="700">Semantic Search + RAG</text>
+    <text x="198" y="570" fill="#D1DEFF" font-family="Arial, sans-serif" font-size="22">Vector databases and embeddings help enterprise systems understand context rather than only keywords.</text>
+    <rect x="198" y="614" width="162" height="14" rx="7" fill="#4F94FF"/>
+    <rect x="198" y="644" width="222" height="14" rx="7" fill="#00C8DC"/>
+    <rect x="198" y="674" width="192" height="14" rx="7" fill="#9060FF"/>
+  </g>
+  <g>
+    <rect x="732" y="456" width="512" height="260" rx="30" fill="#171533" stroke="#9B7BFF" stroke-opacity="0.72"/>
+    <text x="774" y="522" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="34" font-weight="700">AI-Native Delivery Loop</text>
+    <text x="774" y="576" fill="#D7CBFF" font-family="Arial, sans-serif" font-size="22">Code generation, testing support, architecture decisions, and domain APIs all reinforce each other.</text>
+    <path d="M786 636H1184" stroke="url(#flow)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+    <circle cx="836" cy="636" r="16" fill="#4F94FF"/>
+    <circle cx="986" cy="636" r="16" fill="#00C8DC"/>
+    <circle cx="1136" cy="636" r="16" fill="#9060FF"/>
+  </g>
+  <defs>
+    <linearGradient id="flow" x1="786" y1="636" x2="1184" y2="636" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F94FF"/>
+      <stop offset="0.5" stop-color="#00C8DC"/>
+      <stop offset="1" stop-color="#9060FF"/>
+    </linearGradient>
+  </defs>
+</svg>

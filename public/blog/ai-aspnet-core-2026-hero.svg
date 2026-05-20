@@ -1,0 +1,99 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="40" fill="#060914"/>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity="0.55">
+    <path d="M0 160H1600" stroke="url(#gridH)" stroke-width="1"/>
+    <path d="M0 320H1600" stroke="url(#gridH)" stroke-width="1"/>
+    <path d="M0 480H1600" stroke="url(#gridH)" stroke-width="1"/>
+    <path d="M0 640H1600" stroke="url(#gridH)" stroke-width="1"/>
+    <path d="M220 0V900" stroke="url(#gridV)" stroke-width="1"/>
+    <path d="M520 0V900" stroke="url(#gridV)" stroke-width="1"/>
+    <path d="M820 0V900" stroke="url(#gridV)" stroke-width="1"/>
+    <path d="M1120 0V900" stroke="url(#gridV)" stroke-width="1"/>
+    <path d="M1420 0V900" stroke="url(#gridV)" stroke-width="1"/>
+  </g>
+  <circle cx="360" cy="180" r="220" fill="url(#glowBlue)"/>
+  <circle cx="1260" cy="720" r="240" fill="url(#glowPurple)"/>
+  <circle cx="850" cy="420" r="260" fill="url(#glowCyan)"/>
+  <rect x="120" y="96" width="440" height="230" rx="28" fill="#0B1230" stroke="#2254D1" stroke-opacity="0.55"/>
+  <text x="164" y="156" fill="#D8E6FF" font-family="Arial, sans-serif" font-size="28" font-weight="700">ASP.NET Core</text>
+  <text x="164" y="196" fill="#73A7FF" font-family="Arial, sans-serif" font-size="18">Secure APIs, microservices, orchestration</text>
+  <rect x="164" y="228" width="138" height="14" rx="7" fill="#4F94FF"/>
+  <rect x="164" y="258" width="198" height="14" rx="7" fill="#00C8DC" fill-opacity="0.85"/>
+  <rect x="164" y="288" width="248" height="14" rx="7" fill="#9060FF" fill-opacity="0.9"/>
+  <rect x="640" y="204" width="320" height="320" rx="48" fill="url(#core)" stroke="#B8D1FF" stroke-opacity="0.45"/>
+  <rect x="696" y="262" width="208" height="208" rx="36" fill="url(#coreInner)" stroke="#D6E3FF" stroke-opacity="0.22"/>
+  <circle cx="800" cy="184" r="72" fill="url(#orb)" stroke="#DDE8FF" stroke-opacity="0.65" stroke-width="2"/>
+  <text x="752" y="196" fill="white" font-family="Arial, sans-serif" font-size="42" font-weight="700">AI</text>
+  <path d="M560 286C620 286 660 322 696 366" stroke="url(#line1)" stroke-width="3" stroke-dasharray="10 8"/>
+  <path d="M960 366C1004 330 1064 304 1150 300" stroke="url(#line2)" stroke-width="3" stroke-dasharray="10 8"/>
+  <path d="M826 524C900 604 990 640 1110 660" stroke="url(#line3)" stroke-width="3" stroke-dasharray="10 8"/>
+  <rect x="1048" y="142" width="380" height="220" rx="28" fill="#0C1027" stroke="#5B4BEA" stroke-opacity="0.55"/>
+  <text x="1092" y="202" fill="#F6F8FF" font-family="Arial, sans-serif" font-size="28" font-weight="700">AI Services</text>
+  <text x="1092" y="242" fill="#C49EFF" font-family="Arial, sans-serif" font-size="18">OpenAI, Azure OpenAI, embeddings</text>
+  <circle cx="1118" cy="292" r="10" fill="#9060FF"/>
+  <circle cx="1156" cy="292" r="10" fill="#4F94FF"/>
+  <circle cx="1194" cy="292" r="10" fill="#00C8DC"/>
+  <text x="1092" y="332" fill="#D7DEEF" font-family="Arial, sans-serif" font-size="16">Copilots, semantic search, workflow automation</text>
+  <rect x="1028" y="560" width="420" height="200" rx="28" fill="#0B1324" stroke="#1DA6B9" stroke-opacity="0.5"/>
+  <text x="1072" y="620" fill="#F6F8FF" font-family="Arial, sans-serif" font-size="28" font-weight="700">Enterprise Systems</text>
+  <text x="1072" y="660" fill="#8BEAF4" font-family="Arial, sans-serif" font-size="18">Observability, recommendations, RAG, analytics</text>
+  <rect x="1072" y="696" width="150" height="12" rx="6" fill="#00C8DC"/>
+  <rect x="1240" y="696" width="110" height="12" rx="6" fill="#4F94FF"/>
+  <text x="120" y="736" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="74" font-weight="700">How AI is Changing</text>
+  <text x="120" y="812" fill="#C9D7FF" font-family="Arial, sans-serif" font-size="62" font-weight="700">ASP.NET Core Development in 2026</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#060914"/>
+      <stop offset="0.48" stop-color="#091225"/>
+      <stop offset="1" stop-color="#090A17"/>
+    </linearGradient>
+    <linearGradient id="gridH" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="transparent"/>
+      <stop offset="0.5" stop-color="#3050AF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="transparent"/>
+    </linearGradient>
+    <linearGradient id="gridV" x1="0" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="transparent"/>
+      <stop offset="0.5" stop-color="#224A9A" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="transparent"/>
+    </linearGradient>
+    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 180) rotate(90) scale(220)">
+      <stop stop-color="#2459FF" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#2459FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1260 720) rotate(90) scale(240)">
+      <stop stop-color="#8A44FF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#8A44FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(850 420) rotate(90) scale(260)">
+      <stop stop-color="#00B8D4" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#00B8D4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="core" x1="640" y1="204" x2="960" y2="524" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2F58D0" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#5F2FC6" stop-opacity="0.78"/>
+    </linearGradient>
+    <linearGradient id="coreInner" x1="696" y1="262" x2="904" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5A79FF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#7B41EB" stop-opacity="0.74"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(778 164) rotate(52.4) scale(99.4284)">
+      <stop stop-color="#DDEBFF"/>
+      <stop offset="0.44" stop-color="#7CB4FF"/>
+      <stop offset="1" stop-color="#2B57D0"/>
+    </radialGradient>
+    <linearGradient id="line1" x1="560" y1="286" x2="696" y2="366" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F94FF"/>
+      <stop offset="1" stop-color="#9060FF"/>
+    </linearGradient>
+    <linearGradient id="line2" x1="960" y1="366" x2="1150" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9060FF"/>
+      <stop offset="1" stop-color="#00C8DC"/>
+    </linearGradient>
+    <linearGradient id="line3" x1="826" y1="524" x2="1110" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00C8DC"/>
+      <stop offset="1" stop-color="#F070B0"/>
+    </linearGradient>
+  </defs>
+</svg>

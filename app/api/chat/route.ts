@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { blogArticles } from "@/data/blog";
 import { assistantKnowledge, portfolio } from "@/data/portfolio";
 
 type ChatRequest = {
@@ -68,6 +69,7 @@ const keywordBuckets = {
   ],
   education: ["education", "study", "degree", "college", "mca", "bca"],
   references: ["reference", "references", "manager", "recommendation"],
+  blog: ["blog", "article", "writing", "post", "posts", "ai", "asp.net core"],
   private: [
     "married",
     "wife",
@@ -137,6 +139,12 @@ function answerForReferences() {
   return `References are available from ${referenceText}. If you would like an introduction, the easiest path is to contact Akhil directly through email or LinkedIn.`;
 }
 
+function answerForBlog() {
+  const latestArticle = blogArticles[0];
+
+  return `Akhil's latest article is "${latestArticle.title}". It explores how AI-native architecture, copilots, semantic search, and enterprise automation are changing ASP.NET Core development in 2026. You can read it in the Blog section of the portfolio.`;
+}
+
 function answerFallback() {
   return `${assistantKnowledge.summary} ${assistantKnowledge.highlights[0]} ${assistantKnowledge.highlights[1]} If you want, ask about his skills, current role, notable projects, or availability.`;
 }
@@ -158,6 +166,7 @@ function buildReply(question: string) {
     availability: scoreQuestion(question, keywordBuckets.availability),
     education: scoreQuestion(question, keywordBuckets.education),
     references: scoreQuestion(question, keywordBuckets.references),
+    blog: scoreQuestion(question, keywordBuckets.blog),
   };
 
   const strongest = Object.entries(scores).sort((a, b) => b[1] - a[1])[0];
@@ -180,6 +189,8 @@ function buildReply(question: string) {
       return answerForEducation();
     case "references":
       return answerForReferences();
+    case "blog":
+      return answerForBlog();
     default:
       return answerFallback();
   }

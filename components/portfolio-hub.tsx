@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { ChatAssistant } from "@/components/chat-assistant";
@@ -116,7 +117,7 @@ const skillMatrix = [
       ["GraphQL and REST", 90],
     ],
   },
-];
+] as const;
 
 const domainHighlights = ["eCommerce", "Insurance", "Enterprise"] as const;
 
@@ -163,6 +164,14 @@ const projectBullets: Record<string, readonly string[]> = {
     "Translated movement analysis logic into C# scoring algorithms.",
     "Delivered training-focused analytics for player performance feedback.",
   ],
+};
+
+const navPanelMap: Record<string, PanelKey> = {
+  About: "reco",
+  Skills: "music",
+  Experience: "tasks",
+  Projects: "msgs",
+  Contact: "wthr",
 };
 
 export function PortfolioHub() {
@@ -459,31 +468,21 @@ export function PortfolioHub() {
           </button>
           <nav aria-label="Primary">
             <ul className="nlinks">
-              <li>
-                <button className="button-reset" onClick={() => setActivePanel("reco")} type="button">
-                  About
-                </button>
-              </li>
-              <li>
-                <button className="button-reset" onClick={() => setActivePanel("tasks")} type="button">
-                  Experience
-                </button>
-              </li>
-              <li>
-                <button className="button-reset" onClick={() => setActivePanel("music")} type="button">
-                  Skills
-                </button>
-              </li>
-              <li>
-                <button className="button-reset" onClick={() => setActivePanel("msgs")} type="button">
-                  Projects
-                </button>
-              </li>
-              <li>
-                <button className="button-reset" onClick={() => setActivePanel("wthr")} type="button">
-                  Contact
-                </button>
-              </li>
+              {portfolio.nav.map((item) => (
+                <li key={item.label}>
+                  {item.href.startsWith("/") ? (
+                    <Link href={item.href}>{item.label}</Link>
+                  ) : (
+                    <button
+                      className="button-reset"
+                      onClick={() => setActivePanel(navPanelMap[item.label])}
+                      type="button"
+                    >
+                      {item.label}
+                    </button>
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
           <button className="nhire button-reset" onClick={() => setActivePanel("wthr")} type="button">
@@ -521,6 +520,7 @@ export function PortfolioHub() {
             <path className="wire wire-p" d="M792,156 C730,156 680,240 620,300 C580,330 565,342 550,360" />
             <path className="wire wire-c" d="M285,495 C340,475 400,420 480,380 C510,365 530,360 550,360" />
             <path className="wire wire-b" d="M818,460 C760,445 700,415 630,385 C596,370 568,362 550,360" />
+            <path className="wire wire-c" d="M812,344 C750,340 696,364 636,384 C602,396 578,404 550,360" />
             <path className="wire wire-p" d="M430,527 C460,490 500,430 540,390 C543,387 547,384 550,360" />
             <path className="wire wire-c" d="M650,528 C635,490 600,435 570,395 C563,386 556,375 550,360" />
             <path className="wire wire-b" d="M550,92 L550,270" opacity=".3" />
@@ -617,7 +617,7 @@ export function PortfolioHub() {
               {experiencePreview.map((experience, index) => (
                 <div className="ti ti-rich" key={experience.company}>
                   <div className={`tck ${index === 0 ? "ck-b" : index === 1 ? "ck-p" : "ck-e"}`}>
-                    {index < 2 ? "✓" : ""}
+                    {index < 2 ? "+" : ""}
                   </div>
                   <div className="ti-copy">
                     <span className="tt">{experience.company}</span>
@@ -715,7 +715,7 @@ export function PortfolioHub() {
             <div className="cp cp-about-card">
               <div className="ch">
                 <span className="ct">About</span>
-                <span className="card-arrow">›</span>
+                <span className="card-arrow">{">"}</span>
               </div>
               <div className="about-topline">
                 <span className="about-badge">Lead</span>
@@ -755,9 +755,21 @@ export function PortfolioHub() {
               </div>
             </div>
           </button>
+
+          <Link className="fcard fc-blog" href="/blog" id="fc-blog">
+            <div className="cp cp-blog-card">
+              <div className="blog-mini-logo" aria-hidden="true">
+                <span>B</span>
+              </div>
+              <div className="blog-mini-copy">
+                <strong>Blogs</strong>
+                <p>Sharing insights</p>
+              </div>
+            </div>
+          </Link>
         </div>
 
-        <p className="hint-txt">Click any card to explore · Press ESC to close</p>
+        <p className="hint-txt">Click any card to explore | Press ESC to close</p>
 
         <div className="nav-dots">
           {panelOrder.map((panel) => (
@@ -781,7 +793,7 @@ export function PortfolioHub() {
       >
         <div className="popup">
           <button className="pclose button-reset" onClick={() => setActivePanel(null)} type="button">
-            ×
+            x
           </button>
           {activePanel ? (
             <>

@@ -1,0 +1,26 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="900" rx="36" fill="#07101E"/>
+  <rect x="86" y="120" width="1228" height="660" rx="32" fill="#09162A" stroke="#17355D"/>
+  <text x="106" y="82" fill="#DCE7FF" font-family="Arial, sans-serif" font-size="44" font-weight="700">Modern AI Architecture with ASP.NET Core</text>
+  <text x="106" y="842" fill="#8CA7CF" font-family="Arial, sans-serif" font-size="24">Secure orchestration, modular services, and AI capabilities connected through clean APIs.</text>
+  <rect x="524" y="148" width="352" height="94" rx="24" fill="#102342" stroke="#4F94FF" stroke-opacity="0.7"/>
+  <text x="602" y="206" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="30" font-weight="700">React / Next.js</text>
+  <rect x="468" y="306" width="464" height="108" rx="28" fill="#122851" stroke="#72A4FF" stroke-opacity="0.72"/>
+  <text x="510" y="370" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="34" font-weight="700">ASP.NET Core Web API Gateway</text>
+  <rect x="476" y="490" width="448" height="102" rx="28" fill="#201E55" stroke="#9B7BFF" stroke-opacity="0.72"/>
+  <text x="568" y="552" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="30" font-weight="700">AI Service Layer</text>
+  <text x="590" y="586" fill="#C7B6FF" font-family="Arial, sans-serif" font-size="20">OpenAI / Azure OpenAI</text>
+  <rect x="130" y="650" width="280" height="90" rx="22" fill="#0D2236" stroke="#00C8DC" stroke-opacity="0.7"/>
+  <text x="174" y="705" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="700">Microservices</text>
+  <rect x="560" y="650" width="280" height="90" rx="22" fill="#0E233A" stroke="#4F94FF" stroke-opacity="0.7"/>
+  <text x="618" y="705" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="700">SQL + Vector DB</text>
+  <rect x="990" y="650" width="280" height="90" rx="22" fill="#1C1733" stroke="#F070B0" stroke-opacity="0.7"/>
+  <text x="1038" y="705" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="700">Event Bus / Queue</text>
+  <path d="M700 242V304" stroke="#4F94FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M700 414V488" stroke="#7A7CFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M700 594V650" stroke="#8C87FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+  <path d="M700 592C700 648 334 648 270 648" stroke="#00C8DC" stroke-width="3" stroke-dasharray="8 8"/>
+  <path d="M700 592C700 648 1110 648 1130 648" stroke="#F070B0" stroke-width="3" stroke-dasharray="8 8"/>
+  <circle cx="700" cy="448" r="18" fill="#B6C9FF"/>
+  <circle cx="700" cy="448" r="42" fill="#B6C9FF" fill-opacity="0.08"/>
+</svg>

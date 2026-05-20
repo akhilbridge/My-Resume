@@ -45,6 +45,13 @@ export type Reference = {
   contact: string;
 };
 
+export type FeaturedWriting = {
+  title: string;
+  summary: string;
+  href: string;
+  category: string;
+};
+
 export const portfolio = {
   person: {
     name: "Akhil M Nair",
@@ -69,6 +76,7 @@ export const portfolio = {
     { label: "Skills", href: "#skills" },
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "#contact" },
   ] satisfies NavItem[],
   stats: [
@@ -259,6 +267,13 @@ export const portfolio = {
       contact: "+91 9847870905",
     },
   ] satisfies Reference[],
+  featuredWriting: {
+    title: "How AI is Changing ASP.NET Core Development in 2026",
+    summary:
+      "A practical look at how AI-native architecture, copilots, semantic search, and intelligent enterprise workflows are reshaping modern .NET delivery.",
+    href: "/blog/how-ai-is-changing-aspnet-core-development-in-2026",
+    category: "AI x .NET",
+  } satisfies FeaturedWriting,
   quickPrompts: [
     "What are his strongest skills?",
     "What is his current role?",
