@@ -493,7 +493,6 @@ export function PortfolioHub() {
 
       <section className="scene-outer">
         <div className="hero-copy-band">
-          <p className="hero-overline">{portfolio.person.availability}</p>
           <h1>{portfolio.person.name}</h1>
           <p>{portfolio.person.shortBio}</p>
         </div>
@@ -520,7 +519,7 @@ export function PortfolioHub() {
             <path className="wire wire-p" d="M792,156 C730,156 680,240 620,300 C580,330 565,342 550,360" />
             <path className="wire wire-c" d="M285,495 C340,475 400,420 480,380 C510,365 530,360 550,360" />
             <path className="wire wire-b" d="M818,460 C760,445 700,415 630,385 C596,370 568,362 550,360" />
-            <path className="wire wire-c" d="M812,344 C750,340 696,364 636,384 C602,396 578,404 550,360" />
+            <path className="wire wire-c" d="M812,344 C750,340 696,364 636,344 C602,316 478,304 550,360" />
             <path className="wire wire-p" d="M430,527 C460,490 500,430 540,390 C543,387 547,384 550,360" />
             <path className="wire wire-c" d="M650,528 C635,490 600,435 570,395 C563,386 556,375 550,360" />
             <path className="wire wire-b" d="M550,92 L550,270" opacity=".3" />
