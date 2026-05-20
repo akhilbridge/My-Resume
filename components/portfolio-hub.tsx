@@ -762,7 +762,7 @@ export function PortfolioHub() {
 
         <p className="hint-txt">Click any card to explore | Press ESC to close</p>
 
-        <div className="nav-dots">
+        {/* <div className="nav-dots">
           {panelOrder.map((panel) => (
             <button
               className={`ndot ${activePanel === panel ? "active" : ""}`}
@@ -771,7 +771,7 @@ export function PortfolioHub() {
               type="button"
             />
           ))}
-        </div>
+        </div> */}
       </section>
 
       <div
@@ -786,15 +786,17 @@ export function PortfolioHub() {
           <button className="pclose button-reset" onClick={() => setActivePanel(null)} type="button">
             x
           </button>
-          {activePanel ? (
-            <>
-              <span className="p-icon">{panelMeta[activePanel].icon}</span>
-              <div className="p-title">{panelMeta[activePanel].title}</div>
-              <div className="p-sub">{panelMeta[activePanel].subtitle}</div>
-              <div className="popup-divider" />
-              {renderPopupBody()}
-            </>
-          ) : null}
+          <div className="popup-scroll">
+            {activePanel ? (
+              <>
+                <span className="p-icon">{panelMeta[activePanel].icon}</span>
+                <div className="p-title">{panelMeta[activePanel].title}</div>
+                <div className="p-sub">{panelMeta[activePanel].subtitle}</div>
+                <div className="popup-divider" />
+                {renderPopupBody()}
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </main>
