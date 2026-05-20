@@ -646,7 +646,7 @@ export function PortfolioHub() {
               <div className="skill-hero-row">
                 <div className="mart mart-skill">FS</div>
                 <div className="skill-hero-copy">
-                  <div className="mn">Full Stack Delivery</div>
+                  <div className="mn">Full Stack Developer</div>
                   <div className="ma">.NET Core, React, Next.js, Azure</div>
                 </div>
                 <div className="skill-score">
