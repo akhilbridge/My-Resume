@@ -68,6 +68,24 @@ const keywordBuckets = {
   ],
   education: ["education", "study", "degree", "college", "mca", "bca"],
   references: ["reference", "references", "manager", "recommendation"],
+  private: [
+    "married",
+    "wife",
+    "husband",
+    "girlfriend",
+    "boyfriend",
+    "family",
+    "children",
+    "child",
+    "kids",
+    "dating",
+    "relationship",
+    "religion",
+    "caste",
+    "politics",
+    "salary",
+    "income",
+  ],
 } as const;
 
 function normalize(text: string) {
@@ -123,7 +141,15 @@ function answerFallback() {
   return `${assistantKnowledge.summary} ${assistantKnowledge.highlights[0]} ${assistantKnowledge.highlights[1]} If you want, ask about his skills, current role, notable projects, or availability.`;
 }
 
+function answerForPrivateQuestion() {
+  return "I can only answer from Akhil's portfolio data, and it does not include private personal details like relationship or family status. I can help with his skills, experience, projects, current role, education, references, or availability instead.";
+}
+
 function buildReply(question: string) {
+  if (scoreQuestion(question, keywordBuckets.private) > 0) {
+    return answerForPrivateQuestion();
+  }
+
   const scores = {
     skills: scoreQuestion(question, keywordBuckets.skills),
     experience: scoreQuestion(question, keywordBuckets.experience),
