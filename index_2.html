@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akhil M Nair — Lead Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --glass-bg: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.12);
+    --glass-hover: rgba(255,255,255,0.08);
+    --glow-blue: #4f9eff;
+    --glow-purple: #a855f7;
+    --glow-pink: #ec4899;
+    --glow-cyan: #22d3ee;
+    --text-primary: rgba(255,255,255,0.95);
+    --text-secondary: rgba(255,255,255,0.55);
+    --text-muted: rgba(255,255,255,0.3);
+    --bg-dark: #050810;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATED BG ── */
+  .bg-canvas {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(79,158,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(168,85,247,0.10) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 60% 30%, rgba(236,72,153,0.07) 0%, transparent 55%),
+                #050810;
+  }
+  .bg-grid {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(79,158,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,158,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .orb {
+    position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0;
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+  .orb-1 { width: 500px; height: 500px; background: rgba(79,158,255,0.08); top: -100px; left: -100px; animation-delay: 0s; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(168,85,247,0.07); bottom: -50px; right: -80px; animation-delay: -8s; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(34,211,238,0.06); top: 40%; left: 50%; animation-delay: -4s; }
+  @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(40px,30px) scale(1.08); } }
+
+  /* ── LAYOUT ── */
+  .site-wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 0;
+    background: rgba(5,8,16,0.6);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-cta {
+    padding: 8px 20px; border-radius: 100px; font-size: 0.82rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-purple));
+    color: #fff; border: none; cursor: pointer; letter-spacing: 0.03em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ── GLASS CARD ── */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .glass:hover {
+    background: var(--glass-hover);
+    border-color: rgba(79,158,255,0.25);
+    box-shadow: 0 0 30px rgba(79,158,255,0.08), 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .glass-glow-blue { box-shadow: 0 0 0 1px rgba(79,158,255,0.2), 0 0 40px rgba(79,158,255,0.08), inset 0 0 20px rgba(79,158,255,0.03); }
+  .glass-glow-purple { box-shadow: 0 0 0 1px rgba(168,85,247,0.2), 0 0 40px rgba(168,85,247,0.08), inset 0 0 20px rgba(168,85,247,0.03); }
+  .glass-glow-pink { box-shadow: 0 0 0 1px rgba(236,72,153,0.2), 0 0 40px rgba(236,72,153,0.08), inset 0 0 20px rgba(236,72,153,0.03); }
+  .glass-glow-cyan { box-shadow: 0 0 0 1px rgba(34,211,238,0.2), 0 0 40px rgba(34,211,238,0.08), inset 0 0 20px rgba(34,211,238,0.03); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 160px 0 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
+    background: rgba(79,158,255,0.1); border: 1px solid rgba(79,158,255,0.3);
+    font-size: 0.75rem; font-weight: 600; color: var(--glow-blue); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--glow-blue); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(79,158,255,0.4); } 50% { opacity: 0.6; box-shadow: 0 0 0 5px transparent; } }
+  .hero-name {
+    font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 800;
+    line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 8px;
+  }
+  .hero-name span {
+    background: linear-gradient(135deg, #fff 0%, var(--glow-blue) 50%, var(--glow-cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-title {
+    font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.01em;
+  }
+  .hero-title strong { color: var(--glow-blue); font-weight: 500; }
+  .hero-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; max-width: 480px; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 13px 28px; border-radius: 100px; font-size: 0.9rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-purple));
+    color: #fff; border: none; cursor: pointer;
+    box-shadow: 0 0 30px rgba(79,158,255,0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(79,158,255,0.4); }
+  .btn-ghost {
+    padding: 12px 28px; border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+    background: transparent; color: var(--text-primary);
+    border: 1px solid var(--glass-border); cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(79,158,255,0.4); background: rgba(79,158,255,0.06); }
+
+  /* hero stats */
+  .hero-stats { display: flex; gap: 32px; margin-top: 40px; }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-cyan));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .stat-divider { width: 1px; background: var(--glass-border); }
+
+  /* hero card */
+  .hero-card {
+    padding: 32px; position: relative; overflow: hidden;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .hero-card-avatar {
+    width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-purple));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff;
+    box-shadow: 0 0 30px rgba(79,158,255,0.3);
+  }
+  .hero-card-name { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+  .hero-card-role { font-size: 0.82rem; color: var(--glow-blue); font-weight: 500; margin-bottom: 20px; }
+  .hero-card-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 5px 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.04em; border: 1px solid; text-transform: uppercase;
+  }
+  .tag-blue { background: rgba(79,158,255,0.1); border-color: rgba(79,158,255,0.3); color: var(--glow-blue); }
+  .tag-purple { background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.3); color: var(--glow-purple); }
+  .tag-pink { background: rgba(236,72,153,0.1); border-color: rgba(236,72,153,0.3); color: var(--glow-pink); }
+  .tag-cyan { background: rgba(34,211,238,0.1); border-color: rgba(34,211,238,0.3); color: var(--glow-cyan); }
+
+  .hero-card-glow {
+    position: absolute; width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,158,255,0.15) 0%, transparent 70%);
+    bottom: -50px; right: -50px; pointer-events: none;
+  }
+
+  /* mini floating cards on hero */
+  .mini-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+  .mini-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-radius: 14px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  }
+  .mini-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  }
+  .mini-text-title { font-size: 0.8rem; font-weight: 600; }
+  .mini-text-sub { font-size: 0.7rem; color: var(--text-muted); }
+
+  /* ── SECTION HEADER ── */
+  section { padding: 80px 0; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--glow-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--glow-blue); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; line-height: 1.1; }
+  .section-title span {
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 40px; }
+  .skill-card { padding: 28px; }
+  .skill-card-icon { font-size: 1.8rem; margin-bottom: 16px; }
+  .skill-card-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill {
+    padding: 4px 10px; border-radius: 100px; font-size: 0.7rem; font-weight: 500;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-secondary);
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-timeline { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .exp-card { padding: 28px 32px; position: relative; overflow: hidden; }
+  .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+  .exp-company { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
+  .exp-period {
+    padding: 5px 14px; border-radius: 100px; font-size: 0.72rem; font-weight: 600; flex-shrink: 0;
+    background: rgba(79,158,255,0.1); border: 1px solid rgba(79,158,255,0.25); color: var(--glow-blue);
+  }
+  .exp-role { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li {
+    font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;
+    padding-left: 18px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--glow-blue);
+  }
+  .exp-card-glow {
+    position: absolute; width: 160px; height: 160px; border-radius: 50%; pointer-events: none;
+    top: -40px; right: -40px;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 40px; }
+  .project-card { padding: 32px; position: relative; overflow: hidden; }
+  .project-num {
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
+    color: rgba(255,255,255,0.04); line-height: 1; margin-bottom: 16px;
+    position: absolute; top: 20px; right: 24px;
+  }
+  .project-icon { font-size: 2rem; margin-bottom: 14px; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+  .project-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px; }
+  .project-desc { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; border-radius: 14px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none; color: inherit;
+  }
+  .contact-item:hover { background: rgba(79,158,255,0.06); border-color: rgba(79,158,255,0.2); }
+  .contact-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .contact-val { font-size: 0.88rem; font-weight: 500; }
+
+  /* ── AI CHAT ── */
+  .ai-panel { padding: 28px; display: flex; flex-direction: column; height: 520px; }
+  .ai-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border); }
+  .ai-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-purple));
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    box-shadow: 0 0 15px rgba(79,158,255,0.3); flex-shrink: 0;
+  }
+  .ai-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; }
+  .ai-subtitle { font-size: 0.72rem; color: var(--glow-blue); }
+  .ai-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #4ade80; }
+  .ai-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+  .chat-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding-right: 4px; margin-bottom: 16px; }
+  .chat-messages::-webkit-scrollbar { width: 3px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .msg { max-width: 85%; }
+  .msg-ai { align-self: flex-start; }
+  .msg-user { align-self: flex-end; }
+  .msg-bubble {
+    padding: 10px 14px; border-radius: 16px; font-size: 0.83rem; line-height: 1.55;
+  }
+  .msg-ai .msg-bubble {
+    background: rgba(79,158,255,0.08); border: 1px solid rgba(79,158,255,0.15);
+    border-radius: 4px 16px 16px 16px; color: var(--text-primary);
+  }
+  .msg-user .msg-bubble {
+    background: linear-gradient(135deg, rgba(79,158,255,0.2), rgba(168,85,247,0.15));
+    border: 1px solid rgba(79,158,255,0.25);
+    border-radius: 16px 4px 16px 16px; color: var(--text-primary);
+  }
+  .msg-time { font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; }
+  .msg-ai .msg-time { text-align: left; margin-left: 4px; }
+  .msg-user .msg-time { text-align: right; margin-right: 4px; }
+  .typing-indicator { display: flex; gap: 4px; padding: 12px 16px; }
+  .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--glow-blue); animation: typing 1.2s ease-in-out infinite; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
+  .chat-input-wrap { display: flex; gap: 10px; align-items: center; }
+  .chat-input {
+    flex: 1; padding: 12px 16px; border-radius: 14px; font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); color: var(--text-primary);
+    outline: none; resize: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .chat-input:focus { border-color: rgba(79,158,255,0.4); background: rgba(79,158,255,0.05); }
+  .chat-input::placeholder { color: var(--text-muted); }
+  .chat-send {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-purple));
+    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .chat-send:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(79,158,255,0.4); }
+  .chat-send:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .chat-sugg {
+    padding: 5px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 500;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .chat-sugg:hover { background: rgba(79,158,255,0.1); border-color: rgba(79,158,255,0.3); color: var(--text-primary); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 0; border-top: 1px solid var(--glass-border); text-align: center;
+    color: var(--text-muted); font-size: 0.8rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 120px 0 60px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-canvas"></div>
+<div class="bg-grid"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">AMN</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+  </div>
+</nav>
+
+<main class="site-wrap">
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div>
+      <div class="hero-badge">Available for new opportunities</div>
+      <h1 class="hero-name"><span>Akhil M Nair</span></h1>
+      <p class="hero-title">Lead Full Stack Developer · <strong>9+ Years</strong></p>
+      <p class="hero-desc">Building scalable, high-performance web applications across eCommerce, insurance, and enterprise domains. Expert in .NET Core, React/Next.js, Azure & microservices architecture.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+        <button class="btn-ghost" onclick="document.getElementById('ai-chat').scrollIntoView({behavior:'smooth'})">Ask AI About Me ✨</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">9+</div><div class="stat-label">Years Exp</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Companies</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><div class="stat-num">15+</div><div class="stat-label">Technologies</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="glass glass-glow-blue hero-card">
+        <div class="hero-card-avatar">A</div>
+        <div class="hero-card-name">Akhil M Nair</div>
+        <div class="hero-card-role">Lead Developer | Full Stack</div>
+        <div class="hero-card-tags">
+          <span class="tag tag-blue">ASP.NET Core</span>
+          <span class="tag tag-cyan">React.js</span>
+          <span class="tag tag-purple">Next.js</span>
+          <span class="tag tag-pink">Azure</span>
+          <span class="tag tag-blue">Microservices</span>
+          <span class="tag tag-cyan">GraphQL</span>
+        </div>
+        <div class="mini-cards">
+          <div class="mini-card">
+            <div class="mini-icon" style="background:rgba(79,158,255,0.15)">📍</div>
+            <div><div class="mini-text-title">Kochi, Kerala, India</div><div class="mini-text-sub">Open to remote worldwide</div></div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-icon" style="background:rgba(168,85,247,0.15)">🎓</div>
+            <div><div class="mini-text-title">MCA — Mahatma Gandhi University</div><div class="mini-text-sub">Master of Computer Applications</div></div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-icon" style="background:rgba(34,211,238,0.15)">🏢</div>
+            <div><div class="mini-text-title">Bridge Global, Kochi</div><div class="mini-text-sub">Current · Lead Developer</div></div>
+          </div>
+        </div>
+        <div class="hero-card-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="fade-up">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="skills-grid">
+      <div class="glass glass-glow-blue skill-card">
+        <div class="skill-card-icon">⚙️</div>
+        <div class="skill-card-title">Backend</div>
+        <div class="skill-pills">
+          <span class="skill-pill">C#</span><span class="skill-pill">.NET Core</span>
+          <span class="skill-pill">ASP.NET Core</span><span class="skill-pill">Web API</span>
+          <span class="skill-pill">Entity Framework</span><span class="skill-pill">LINQ</span>
+          <span class="skill-pill">Minimal APIs</span>
+        </div>
+      </div>
+      <div class="glass glass-glow-cyan skill-card">
+        <div class="skill-card-icon">🎨</div>
+        <div class="skill-card-title">Frontend</div>
+        <div class="skill-pills">
+          <span class="skill-pill">React.js</span><span class="skill-pill">Next.js</span>
+          <span class="skill-pill">TypeScript</span><span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">HTML5</span><span class="skill-pill">CSS3</span>
+          <span class="skill-pill">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="glass glass-glow-purple skill-card">
+        <div class="skill-card-icon">🏗️</div>
+        <div class="skill-card-title">Architecture</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Microservices</span><span class="skill-pill">Clean Architecture</span>
+          <span class="skill-pill">MVC</span><span class="skill-pill">SOLID</span>
+          <span class="skill-pill">Event-Driven</span><span class="skill-pill">Layered</span>
+        </div>
+      </div>
+      <div class="glass glass-glow-pink skill-card">
+        <div class="skill-card-icon">🔐</div>
+        <div class="skill-card-title">API & Security</div>
+        <div class="skill-pills">
+          <span class="skill-pill">REST APIs</span><span class="skill-pill">GraphQL</span>
+          <span class="skill-pill">JWT</span><span class="skill-pill">OAuth2</span>
+          <span class="skill-pill">Swagger</span><span class="skill-pill">RBAC</span>
+        </div>
+      </div>
+      <div class="glass glass-glow-blue skill-card">
+        <div class="skill-card-icon">🗄️</div>
+        <div class="skill-card-title">Database</div>
+        <div class="skill-pills">
+          <span class="skill-pill">SQL Server</span><span class="skill-pill">MySQL</span>
+          <span class="skill-pill">T-SQL</span><span class="skill-pill">Dapper</span>
+          <span class="skill-pill">Stored Procedures</span><span class="skill-pill">Query Optimization</span>
+        </div>
+      </div>
+      <div class="glass glass-glow-cyan skill-card">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">Cloud & DevOps</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Azure</span><span class="skill-pill">AWS</span>
+          <span class="skill-pill">Docker</span><span class="skill-pill">CI/CD</span>
+          <span class="skill-pill">Azure DevOps</span><span class="skill-pill">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="fade-up">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="exp-timeline">
+
+      <div class="glass glass-glow-blue exp-card">
+        <div class="exp-card-glow" style="background:radial-gradient(circle,rgba(79,158,255,0.12) 0%,transparent 70%)"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Bridge Global</div>
+            <div class="exp-role">Lead Full Stack .NET Developer · Kochi</div>
+          </div>
+          <span class="exp-period">2021 – Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Led development of scalable eCommerce platforms using Litium, .NET Core, and React across multi-country markets</li>
+          <li>Built and optimized GraphQL and REST APIs for high-performance systems with async/await patterns</li>
+          <li>Improved system performance and maintainability using Clean Architecture & SOLID principles</li>
+          <li>Integrated cloud services (AWS & Azure) for scalable and secure solutions including Cognito, S3, SES</li>
+        </ul>
+      </div>
+
+      <div class="glass glass-glow-purple exp-card">
+        <div class="exp-card-glow" style="background:radial-gradient(circle,rgba(168,85,247,0.12) 0%,transparent 70%)"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Weboffice Infotech</div>
+            <div class="exp-role">Full Stack Developer · Trivandrum</div>
+          </div>
+          <span class="exp-period">2019 – 2021</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Developed enterprise applications using ASP.NET Core, Web API, and SQL Server</li>
+          <li>Built and optimized GraphQL and REST APIs for high-performance systems</li>
+          <li>Designed secure APIs with JWT authentication and role-based access control</li>
+          <li>Worked on performance optimization and database tuning with stored procedures</li>
+        </ul>
+      </div>
+
+      <div class="glass glass-glow-pink exp-card">
+        <div class="exp-card-glow" style="background:radial-gradient(circle,rgba(236,72,153,0.12) 0%,transparent 70%)"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Mecnize Software Solutions</div>
+            <div class="exp-role">Junior Developer · Kochi</div>
+          </div>
+          <span class="exp-period">2016 – 2019</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built web applications using ASP.NET MVC, Web API, and SQL Server</li>
+          <li>Developed reusable components and improved system reliability</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-up">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="projects-grid">
+
+      <div class="glass glass-glow-blue project-card">
+        <div class="project-num">01</div>
+        <div class="project-icon">🛒</div>
+        <div class="project-title">Litium eCommerce Platform</div>
+        <div class="project-meta">5 years · Team of 10</div>
+        <div class="project-desc">Multi-country eCommerce solutions using Litium platform. Features product catalog management, pricing, promotions, checkout, and order workflows with multi-market and multi-currency support.</div>
+        <div class="project-tech">
+          <span class="tag tag-blue">ASP.NET Core</span>
+          <span class="tag tag-cyan">React</span>
+          <span class="tag tag-purple">GraphQL</span>
+          <span class="tag tag-pink">SQL Server</span>
+        </div>
+      </div>
+
+      <div class="glass glass-glow-purple project-card">
+        <div class="project-num">02</div>
+        <div class="project-icon">🛡️</div>
+        <div class="project-title">Cyber Insurance Platform</div>
+        <div class="project-meta">1 year · Team of 10</div>
+        <div class="project-desc">Led migration of a legacy .NET application to modern Node.js architecture. Re-architected backend services and integrated AWS Cognito, SES, and S3 for secure operations.</div>
+        <div class="project-tech">
+          <span class="tag tag-purple">Node.js</span>
+          <span class="tag tag-cyan">React</span>
+          <span class="tag tag-pink">AWS Cognito</span>
+          <span class="tag tag-blue">S3 / SES</span>
+        </div>
+      </div>
+
+      <div class="glass glass-glow-cyan project-card">
+        <div class="project-num">03</div>
+        <div class="project-icon">⛳</div>
+        <div class="project-title">Golf Gaming & Analysis App</div>
+        <div class="project-meta">3 years · Team of 10</div>
+        <div class="project-desc">Bluetooth-enabled golf training app capturing body movements via wearable sensors. Translated complex motion analysis algorithms into C#, generating XYZ performance scores in real time.</div>
+        <div class="project-tech">
+          <span class="tag tag-blue">ASP.NET Web API</span>
+          <span class="tag tag-cyan">C#</span>
+          <span class="tag tag-purple">SQL Server</span>
+          <span class="tag tag-pink">Bluetooth SDK</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT + AI CHAT -->
+  <section id="contact" class="fade-up">
+    <div class="section-label">Connect</div>
+    <h2 class="section-title">Get in <span>Touch</span></h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info">
+          <a class="contact-item" href="tel:+917558811227">
+            <div class="contact-icon" style="background:rgba(79,158,255,0.12)">📞</div>
+            <div><div class="contact-label">Phone</div><div class="contact-val">+91 7558811227</div></div>
+          </a>
+          <a class="contact-item" href="mailto:akhilmnair7@gmail.com">
+            <div class="contact-icon" style="background:rgba(168,85,247,0.12)">✉️</div>
+            <div><div class="contact-label">Email</div><div class="contact-val">akhilmnair7@gmail.com</div></div>
+          </a>
+          <a class="contact-item" href="https://www.linkedin.com/in/akhil1m1n" target="_blank">
+            <div class="contact-icon" style="background:rgba(34,211,238,0.12)">💼</div>
+            <div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/akhil1m1n</div></div>
+          </a>
+          <a class="contact-item" href="#">
+            <div class="contact-icon" style="background:rgba(236,72,153,0.12)">📍</div>
+            <div><div class="contact-label">Location</div><div class="contact-val">Kochi, Kerala, India</div></div>
+          </a>
+        </div>
+        <div style="margin-top:20px;" class="glass" style="padding:24px">
+          <div style="padding:24px;">
+            <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;margin-bottom:14px;">
+              <strong style="color:var(--text-primary)">References available:</strong>
+            </p>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:160px;padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+                <div style="font-size:0.85rem;font-weight:600;">Jinesh V</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);margin:2px 0 6px;">Bridge Global · Process Manager</div>
+                <div style="font-size:0.72rem;color:var(--glow-blue);">+91 9846298009</div>
+              </div>
+              <div style="flex:1;min-width:160px;padding:14px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+                <div style="font-size:0.85rem;font-weight:600;">Vishnu KJ</div>
+                <div style="font-size:0.72rem;color:var(--text-muted);margin:2px 0 6px;">Bridge Global · Project Manager</div>
+                <div style="font-size:0.72rem;color:var(--glow-blue);">+91 9847870905</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI CHAT -->
+      <div class="glass glass-glow-blue ai-panel" id="ai-chat">
+        <div class="ai-header">
+          <div class="ai-avatar">🤖</div>
+          <div><div class="ai-title">Ask About Akhil</div><div class="ai-subtitle">AI-powered career assistant</div></div>
+          <div class="ai-status">Online</div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg msg-ai">
+            <div class="msg-bubble">Hi! I'm Akhil's AI assistant. Ask me anything about his skills, experience, projects, or availability. I'm here to help! 👋</div>
+            <div class="msg-time">Just now</div>
+          </div>
+        </div>
+        <div class="chat-suggestions" id="suggestions">
+          <button class="chat-sugg" onclick="askSuggestion(this)">What are his skills?</button>
+          <button class="chat-sugg" onclick="askSuggestion(this)">Current job?</button>
+          <button class="chat-sugg" onclick="askSuggestion(this)">Best projects?</button>
+          <button class="chat-sugg" onclick="askSuggestion(this)">Tech stack?</button>
+        </div>
+        <div class="chat-input-wrap">
+          <input class="chat-input" id="chatInput" type="text" placeholder="Ask anything about Akhil..." onkeydown="handleKey(event)" />
+          <button class="chat-send" id="sendBtn" onclick="sendMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="site-wrap">
+    <p style="margin-bottom:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text-secondary)">Akhil M Nair</p>
+    <p>Lead Full Stack .NET Developer · Kochi, Kerala · Built with ♡</p>
+  </div>
+</footer>
+
+<script>
+// ── FADE UP OBSERVER ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── AI CHAT ──
+const RESUME_CONTEXT = `
+You are an AI assistant for Akhil M Nair's portfolio website. Answer questions about him warmly and professionally.
+
+AKHIL M NAIR — Lead Developer | Full Stack
+Contact: +91 7558811227 | akhilmnair7@gmail.com | linkedin.com/in/akhil1m1n | Kochi, Kerala, India
+
+PROFILE: Lead Full Stack .NET Developer with 9+ years of experience designing and delivering scalable, high-performance web applications across eCommerce, insurance, and enterprise domains. Expertise in C#, .NET Core / .NET 6+, ASP.NET Core, and React/Next.js, with strong experience in microservices architecture, cloud-native development (Azure & AWS), and API-driven systems. Proven ability to lead teams, architect solutions, and deliver secure, scalable systems using Clean Architecture, SOLID principles, and modern DevOps practices.
+
+EDUCATION:
+- Master of Computer Applications, Mahatma Gandhi University (2016)
+- Bachelor of Computer Applications, Mahatma Gandhi University (2013)
+
+WORK EXPERIENCE:
+1. Bridge Global, Kochi | 2021 – Present (Lead Full Stack .NET Developer)
+   - Led development of scalable eCommerce platforms using Litium, .NET Core, and React
+   - Built and optimized GraphQL and REST APIs for high-performance systems
+   - Improved system performance using Clean Architecture & SOLID principles
+   - Integrated cloud services (AWS & Azure) for scalable and secure solutions
+
+2. Weboffice Infotech, Trivandrum | 2019–2021
+   - Developed enterprise applications using ASP.NET Core, Web API, SQL Server
+   - Designed secure APIs with JWT authentication and role-based access
+   - Performance optimization and database tuning
+
+3. Mecnize Software Solutions, Kochi | 2016–2019
+   - Built web applications using ASP.NET MVC, Web API, SQL Server
+   - Developed reusable components and improved system reliability
+
+PROJECTS:
+1. Litium-Based eCommerce Platforms (5 years, team of 10)
+   - Multi-country eCommerce using Litium, ASP.NET Core, React
+   - GraphQL APIs, payment/shipment integrations, multi-currency support
+
+2. Cyber Insurance Platform (1 year, team of 10)
+   - Migration from legacy .NET to Node.js
+   - AWS Cognito, SES, S3 integration
+
+3. Golf Gaming and Analysis App (3 years, team of 10)
+   - Bluetooth-enabled wearable sensor app
+   - ASP.NET Web API, C#, real-time motion data analysis
+
+TECHNICAL SKILLS:
+- Backend: C#, .NET Core, ASP.NET Core Web API, ASP.NET MVC, Entity Framework Core, LINQ, Minimal APIs
+- Frontend: React.js, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS
+- Architecture: MVC, Layered, Microservices, Clean Architecture, SOLID, Event-Driven
+- API & Security: REST APIs, GraphQL, Swagger/OpenAPI, JWT, OAuth2, Role-Based Authorization
+- Database: SQL Server, MySQL, T-SQL, Stored Procedures, Query Optimization, Data Modeling, Dapper
+- Cloud & DevOps: Microsoft Azure, AWS (Cognito, S3, SES), Azure DevOps, CI/CD, Docker, Git, GitHub, Bitbucket
+- Testing: Unit Testing, Integration Testing, Code Reviews
+
+REFERENCES:
+- Jinesh V, Bridge Global Process Manager: jinesh.v@bridge-global.com, +91 9846298009
+- Vishnu KJ, Bridge Global Project Manager: vishnu.kj@bridge-global.com, +91 9847870905
+
+Keep answers concise (2-4 sentences), friendly, and professional. If asked about availability or hiring, encourage reaching out via email or LinkedIn. Use emojis sparingly for warmth.
+`;
+
+let chatHistory = [];
+let isLoading = false;
+
+function getTime() {
+  return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+}
+
+function addMessage(text, isUser) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg msg-${isUser ? 'user' : 'ai'}`;
+  div.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">${getTime()}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-ai'; div.id = 'typingIndicator';
+  div.innerHTML = `<div class="msg-bubble typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typingIndicator');
+  if (el) el.remove();
+}
+
+async function sendMessage(text) {
+  if (isLoading) return;
+  const input = document.getElementById('chatInput');
+  const userMsg = text || input.value.trim();
+  if (!userMsg) return;
+
+  input.value = '';
+  document.getElementById('suggestions').style.display = 'none';
+  addMessage(userMsg, true);
+  chatHistory.push({ role: 'user', content: userMsg });
+
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+  showTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: RESUME_CONTEXT,
+        messages: chatHistory
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please try again!";
+    chatHistory.push({ role: 'assistant', content: reply });
+    addMessage(reply, false);
+  } catch (e) {
+    removeTyping();
+    addMessage("Oops, something went wrong. Please try again in a moment! 🙏", false);
+  }
+
+  isLoading = false;
+  document.getElementById('sendBtn').disabled = false;
+}
+
+function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
+function askSuggestion(btn) { sendMessage(btn.textContent); }
+</script>
+</body>
+</html>
