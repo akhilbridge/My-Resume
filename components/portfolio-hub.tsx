@@ -613,7 +613,6 @@ export function PortfolioHub() {
             <div className="cp">
               <div className="ch">
                 <span className="ct">Experience</span>
-                <span className="card-ghost">...</span>
               </div>
               {experiencePreview.map((experience, index) => (
                 <div className="ti ti-rich" key={experience.company}>
@@ -714,7 +713,6 @@ export function PortfolioHub() {
             <div className="cp cp-about-card">
               <div className="ch">
                 <span className="ct">About</span>
-                <span className="card-arrow">{">"}</span>
               </div>
               <div className="about-topline">
                 <span className="about-badge">Lead</span>
