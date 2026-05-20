@@ -641,7 +641,6 @@ export function PortfolioHub() {
             <div className="cp cp-skill-card">
               <div className="ch">
                 <span className="ct">Skill Stack</span>
-                <span className="card-heart">+</span>
               </div>
               <div className="skill-hero-row">
                 <div className="mart mart-skill">FS</div>
