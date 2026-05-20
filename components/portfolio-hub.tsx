@@ -260,7 +260,7 @@ export function PortfolioHub() {
           <article className="popup-row">
             <span className="popup-dot" />
             <p>
-              Current focus: leading full stack delivery for Litium-based eCommerce
+              Current focus: leading full stack developer for Litium-based eCommerce
               platforms, modern APIs, and cloud-backed systems at Bridge Global.
             </p>
           </article>

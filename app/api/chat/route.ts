@@ -115,7 +115,7 @@ function answerForExperience() {
 }
 
 function answerForCurrentRole() {
-  return `He is currently working at ${portfolio.person.currentCompany} in Kochi as a ${portfolio.person.currentRole}. In that role he leads full stack delivery across Litium eCommerce platforms, API systems, and cloud-backed solutions.`;
+  return `He is currently working at ${portfolio.person.currentCompany} in Kochi as a ${portfolio.person.currentRole}. In that role he leads full stack developer across Litium eCommerce platforms, API systems, and cloud-backed solutions.`;
 }
 
 function answerForProjects() {
