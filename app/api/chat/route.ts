@@ -115,6 +115,12 @@ function buildDebugInfo() {
   };
 }
 
+function logChatEvent(event: string, details: Record<string, string | boolean | null>) {
+  console.log(
+    `[chat] ${event} ${JSON.stringify(details)}`
+  );
+}
+
 const portfolioContext = `
 Portfolio owner: ${portfolio.person.name}
 Role: ${portfolio.person.currentRole}
@@ -329,6 +335,12 @@ export async function POST(request: Request) {
     body.messages?.filter((message) => message.role === "user").at(-1)?.content ||
     "";
 
+  logChatEvent("post_received", {
+    envDetected: Boolean(geminiApiKey),
+    hasQuestion: Boolean(question),
+    model: geminiApiKey ? geminiModel : null,
+  });
+
   if (!question) {
     return NextResponse.json(
       { debug: buildDebugInfo(), mode: "local", reply: answerFallback() },
@@ -337,6 +349,11 @@ export async function POST(request: Request) {
   }
 
   if (!geminiApiKey) {
+    logChatEvent("local_reply_missing_env", {
+      envDetected: false,
+      model: null,
+    });
+
     return NextResponse.json(
       { debug: buildDebugInfo(), mode: "local", reply: buildLocalReply(question) },
       { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
@@ -344,15 +361,30 @@ export async function POST(request: Request) {
   }
 
   try {
+    logChatEvent("gemini_request_start", {
+      envDetected: true,
+      model: geminiModel,
+    });
+
     const reply = await buildGeminiReply(question, body.messages);
 
     if (reply) {
+      logChatEvent("gemini_request_success", {
+        envDetected: true,
+        model: geminiModel,
+      });
+
       return NextResponse.json(
         { debug: buildDebugInfo(), mode: "gemini", reply },
         { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
       );
     }
   } catch {
+    logChatEvent("gemini_request_failed", {
+      envDetected: true,
+      model: geminiModel,
+    });
+
     const fallbackReply = buildLocalReply(question);
     return NextResponse.json({
         debug: buildDebugInfo(),
@@ -363,6 +395,11 @@ export async function POST(request: Request) {
     );
   }
 
+  logChatEvent("local_reply_after_empty_gemini", {
+    envDetected: true,
+    model: geminiModel,
+  });
+
   return NextResponse.json(
     { debug: buildDebugInfo(), mode: "local", reply: buildLocalReply(question) },
     { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
@@ -370,6 +407,11 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  logChatEvent("status_check", {
+    envDetected: Boolean(geminiApiKey),
+    model: geminiApiKey ? geminiModel : null,
+  });
+
   return NextResponse.json(
     {
       debug: buildDebugInfo(),
