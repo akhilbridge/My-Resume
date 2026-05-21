@@ -15,6 +15,13 @@ type ChatAssistantProps = {
 };
 
 type ChatMode = "fallback" | "gemini" | "local" | "ready";
+type ChatStatusPayload = {
+  debug?: {
+    envDetected: boolean;
+    model: string | null;
+  };
+  mode?: ChatMode;
+};
 
 const initialMessage: ChatMessage = {
   role: "assistant",
@@ -46,6 +53,7 @@ export function ChatAssistant({
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [mode, setMode] = useState<ChatMode>("local");
+  const [debugInfo, setDebugInfo] = useState<ChatStatusPayload["debug"] | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -57,13 +65,15 @@ export function ChatAssistant({
           cache: "no-store",
         });
 
-        const data = (await response.json()) as { mode?: ChatMode };
+        const data = (await response.json()) as ChatStatusPayload;
         if (isMounted && data.mode) {
           setMode(data.mode);
+          setDebugInfo(data.debug ?? null);
         }
       } catch {
         if (isMounted) {
           setMode("local");
+          setDebugInfo(null);
         }
       }
     }
@@ -104,6 +114,10 @@ export function ChatAssistant({
       });
 
       const data = (await response.json()) as {
+        debug?: {
+          envDetected: boolean;
+          model: string | null;
+        };
         mode?: ChatMode;
         reply?: string;
       };
@@ -111,6 +125,7 @@ export function ChatAssistant({
         data.reply ??
         "I could not answer that clearly yet, but I can help with skills, projects, experience, and hiring questions.";
       setMode(data.mode ?? "local");
+      setDebugInfo(data.debug ?? null);
 
       startTransition(() => {
         setMessages((current) => [
@@ -178,19 +193,27 @@ export function ChatAssistant({
       ) : null}
 
       {variant === "compact" ? (
-        <div className="chat-compact-meta">
-          <span
-            className={`chat-status ${
-              mode === "ready" ? "chat-status-ready" : ""
-            } ${
-              mode === "fallback" ? "chat-status-fallback" : ""
-            } ${
-              mode === "gemini" ? "chat-status-gemini" : ""
-            }`}
-          >
-            {getModeLabel(mode)}
-          </span>
-        </div>
+        <>
+          <div className="chat-compact-meta">
+            <span
+              className={`chat-status ${
+                mode === "ready" ? "chat-status-ready" : ""
+              } ${
+                mode === "fallback" ? "chat-status-fallback" : ""
+              } ${
+                mode === "gemini" ? "chat-status-gemini" : ""
+              }`}
+            >
+              {getModeLabel(mode)}
+            </span>
+          </div>
+          {debugInfo ? (
+            <div className="chat-debug">
+              <span>Env: {debugInfo.envDetected ? "Detected" : "Missing"}</span>
+              <span>Model: {debugInfo.model ?? "None"}</span>
+            </div>
+          ) : null}
+        </>
       ) : null}
 
       <div className="chat-thread" aria-live="polite">

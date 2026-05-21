@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 import { blogArticles } from "@/data/blog";
 import { assistantKnowledge, portfolio } from "@/data/portfolio";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type ChatMessage = {
   role: "assistant" | "user";
   content: string;
@@ -104,6 +107,13 @@ const keywordBuckets = {
 
 const geminiApiKey = process.env.GEMINI_API_KEY;
 const geminiModel = process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
+
+function buildDebugInfo() {
+  return {
+    envDetected: Boolean(geminiApiKey),
+    model: geminiApiKey ? geminiModel : null,
+  };
+}
 
 const portfolioContext = `
 Portfolio owner: ${portfolio.person.name}
@@ -320,33 +330,52 @@ export async function POST(request: Request) {
     "";
 
   if (!question) {
-    return NextResponse.json({ mode: "local", reply: answerFallback() });
+    return NextResponse.json(
+      { debug: buildDebugInfo(), mode: "local", reply: answerFallback() },
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
+    );
   }
 
   if (!geminiApiKey) {
-    return NextResponse.json({ mode: "local", reply: buildLocalReply(question) });
+    return NextResponse.json(
+      { debug: buildDebugInfo(), mode: "local", reply: buildLocalReply(question) },
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
+    );
   }
 
   try {
     const reply = await buildGeminiReply(question, body.messages);
 
     if (reply) {
-      return NextResponse.json({ mode: "gemini", reply });
+      return NextResponse.json(
+        { debug: buildDebugInfo(), mode: "gemini", reply },
+        { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
+      );
     }
   } catch {
     const fallbackReply = buildLocalReply(question);
     return NextResponse.json({
-      mode: "fallback",
-      reply: `The live Gemini assistant is unavailable right now, so I answered from the local portfolio data instead. ${fallbackReply}`,
-    });
+        debug: buildDebugInfo(),
+        mode: "fallback",
+        reply: `The live Gemini assistant is unavailable right now, so I answered from the local portfolio data instead. ${fallbackReply}`,
+      },
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
+    );
   }
 
-  return NextResponse.json({ mode: "local", reply: buildLocalReply(question) });
+  return NextResponse.json(
+    { debug: buildDebugInfo(), mode: "local", reply: buildLocalReply(question) },
+    { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
+  );
 }
 
 export async function GET() {
-  return NextResponse.json({
-    mode: geminiApiKey ? "ready" : "local",
-    model: geminiApiKey ? geminiModel : null,
-  });
+  return NextResponse.json(
+    {
+      debug: buildDebugInfo(),
+      mode: geminiApiKey ? "ready" : "local",
+      model: geminiApiKey ? geminiModel : null,
+    },
+    { headers: { "Cache-Control": "no-store, no-cache, must-revalidate" } }
+  );
 }

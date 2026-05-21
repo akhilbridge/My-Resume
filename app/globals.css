@@ -1665,6 +1665,14 @@ input {
   justify-content: flex-end;
 }
 
+.chat-debug {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.42);
+}
+
 .chat-header {
   display: grid;
   grid-template-columns: auto 1fr auto;
