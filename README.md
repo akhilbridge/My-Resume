@@ -9,7 +9,7 @@ This site is a portfolio-style AI hub with:
 - A desktop interactive scene with floating cards
 - A mobile-friendly stacked layout
 - Resume-backed content for experience, skills, projects, and contact
-- A lightweight local `/api/chat` assistant for portfolio questions
+- A portfolio chat assistant with optional Gemini integration and local fallback
 
 ## Tech stack
 
@@ -49,6 +49,13 @@ npm.cmd run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+To enable real Gemini responses, copy `.env.example` to `.env.local` and set:
+
+```powershell
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash-lite
+```
+
 ## Production build
 
 ```powershell
@@ -85,12 +92,13 @@ Use that file for:
 
 ## Chat assistant
 
-The chat is intentionally simple and free to run.
-
 - UI: `components/chat-assistant.tsx`
 - Logic: `app/api/chat/route.ts`
 
-It answers based on local portfolio data instead of a paid AI provider.
+Behavior:
+
+- If `GEMINI_API_KEY` is set, the chat calls Gemini using portfolio-aware instructions
+- If no key is set, it falls back to the local rules-based portfolio assistant
 
 ## Responsive behavior
 

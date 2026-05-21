@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, KeyboardEvent, startTransition, useState } from "react";
+import { FormEvent, KeyboardEvent, startTransition, useEffect, useState } from "react";
 
 type ChatMessage = {
   role: "assistant" | "user";
@@ -14,22 +14,66 @@ type ChatAssistantProps = {
   variant?: "default" | "compact";
 };
 
+type ChatMode = "fallback" | "gemini" | "local" | "ready";
+
 const initialMessage: ChatMessage = {
   role: "assistant",
   content:
-    "Hi, I am Akhil's career assistant. Ask me about his skills, projects, experience, or availability and I will answer from the portfolio data.",
+    "Hi, I am Akhil's portfolio assistant. Ask me about his skills, projects, experience, blog posts, or availability.",
 };
+
+function getModeLabel(mode: ChatMode) {
+  switch (mode) {
+    case "gemini":
+      return "Gemini Live";
+    case "ready":
+      return "Gemini Ready";
+    case "fallback":
+      return "Fallback";
+    default:
+      return "Local";
+  }
+}
 
 export function ChatAssistant({
   prompts,
   title = "Career Assistant",
-  subtitle = "Free local portfolio chat. No paid AI service needed.",
+  subtitle = "Portfolio-aware chat with Gemini support and local fallback.",
   variant = "default",
 }: ChatAssistantProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([initialMessage]);
   const [draft, setDraft] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [mode, setMode] = useState<ChatMode>("local");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadProviderStatus() {
+      try {
+        const response = await fetch("/api/chat", {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        const data = (await response.json()) as { mode?: ChatMode };
+        if (isMounted && data.mode) {
+          setMode(data.mode);
+        }
+      } catch {
+        if (isMounted) {
+          setMode("local");
+        }
+      }
+    }
+
+    void loadProviderStatus();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   async function submitMessage(question: string) {
     const cleanQuestion = question.trim();
@@ -59,10 +103,14 @@ export function ChatAssistant({
         }),
       });
 
-      const data = (await response.json()) as { reply?: string };
+      const data = (await response.json()) as {
+        mode?: ChatMode;
+        reply?: string;
+      };
       const reply =
         data.reply ??
         "I could not answer that clearly yet, but I can help with skills, projects, experience, and hiring questions.";
+      setMode(data.mode ?? "local");
 
       startTransition(() => {
         setMessages((current) => [
@@ -115,7 +163,33 @@ export function ChatAssistant({
             <h3>{title}</h3>
             <p>{subtitle}</p>
           </div>
-          <span className="chat-status">Online</span>
+          <span
+            className={`chat-status ${
+              mode === "ready" ? "chat-status-ready" : ""
+            } ${
+              mode === "fallback" ? "chat-status-fallback" : ""
+            } ${
+              mode === "gemini" ? "chat-status-gemini" : ""
+            }`}
+          >
+            {getModeLabel(mode)}
+          </span>
+        </div>
+      ) : null}
+
+      {variant === "compact" ? (
+        <div className="chat-compact-meta">
+          <span
+            className={`chat-status ${
+              mode === "ready" ? "chat-status-ready" : ""
+            } ${
+              mode === "fallback" ? "chat-status-fallback" : ""
+            } ${
+              mode === "gemini" ? "chat-status-gemini" : ""
+            }`}
+          >
+            {getModeLabel(mode)}
+          </span>
         </div>
       ) : null}
 

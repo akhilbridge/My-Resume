@@ -52,6 +52,13 @@ export type FeaturedWriting = {
   category: string;
 };
 
+export type ProfileSource = {
+  label: string;
+  value: string;
+  href: string;
+  type: "professional" | "social";
+};
+
 export const portfolio = {
   person: {
     name: "Akhil M Nair",
@@ -250,11 +257,30 @@ export const portfolio = {
       href: "https://www.linkedin.com/in/akhil1m1n",
     },
     {
+      label: "Instagram",
+      value: "instagram.com/_real_akhil",
+      href: "https://www.instagram.com/_real_akhil/",
+    },
+    {
       label: "Location",
       value: "Kochi, Kerala, India",
       href: "https://www.google.com/maps/search/Kochi,+Kerala,+India",
     },
   ] satisfies ContactItem[],
+  profileSources: [
+    {
+      label: "LinkedIn",
+      value: "linkedin.com/in/akhil1m1n",
+      href: "https://www.linkedin.com/in/akhil1m1n",
+      type: "professional",
+    },
+    {
+      label: "Instagram",
+      value: "instagram.com/_real_akhil",
+      href: "https://www.instagram.com/_real_akhil/",
+      type: "social",
+    },
+  ] satisfies ProfileSource[],
   references: [
     {
       name: "Jinesh V",
