@@ -207,12 +207,12 @@ export function ChatAssistant({
               {getModeLabel(mode)}
             </span>
           </div>
-          {debugInfo ? (
+          {/* {debugInfo ? (
             <div className="chat-debug">
               <span>Env: {debugInfo.envDetected ? "Detected" : "Missing"}</span>
               <span>Model: {debugInfo.model ?? "None"}</span>
             </div>
-          ) : null}
+          ) : null} */}
         </>
       ) : null}
 
