@@ -1371,6 +1371,7 @@ input {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   font-size: 1rem;
   transition: all 0.2s;
+  padding-bottom: 4px;
 }
 
 .pclose:hover {
